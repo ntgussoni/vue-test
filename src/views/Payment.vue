@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <h1>Payment</h1>
+    <h1>CHECKOUT</h1>
     <CardsCarousel :flipCard="flipCard" :formData="formData"/>
     <form method="POST" @submit="submitForm">
       <NameInput :data="formData.name" @change="handleNameChange"/>
@@ -116,23 +116,6 @@ export default {
       this.flipCard = !this.flipCard;
     },
 
-    // validateForm() {
-    //   let isValid = true;
-    //   Object.keys(this.formData).forEach(key => {
-    //     const { value, validations } = this.formData[key];
-    //     const errors = [];
-
-    //     validations.forEach(fn => {
-    //       const msg = fn(value);
-    //       if (msg !== true) errors.push(msg);
-    //     });
-    //     if (errors.length > 0) isValid = false;
-    //     this.formData[key].errors = errors;
-    //   });
-
-    //   return isValid;
-    // },
-
     submitForm(e) {
       e.preventDefault();
       this.formIsValid ? this.$router.push("success") : e.preventDefault();
@@ -145,20 +128,27 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  width: 30vw;
+  background: white;
+  margin: 18px;
+  padding: 18px;
+  border-radius: 16px;
 
-  @include media("<tablet") {
+  @include media(">=phone") {
     width: 100vw;
   }
-
-  @include media(">=tablet", "<=desktop") {
-    width: 50vw;
+  @include media(">=tablet") {
+    width: 60vw;
+  }
+  @include media(">=desktop") {
+    width: 45vw;
   }
 
   h1 {
+    margin-top: 16px;
     margin-bottom: 16px;
-    font-size: 1.2rem;
+    font-size: 2rem;
+    color: $primary;
+    font-weight: bold;
 
     @include media("<tablet") {
       display: none;

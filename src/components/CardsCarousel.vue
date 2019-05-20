@@ -18,11 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 .carousel {
-  padding: 1rem;
   width: 100%;
-
-  @include media("<tablet") {
-    padding: 1.8rem;
-  }
+  margin-bottom: 16px;
 }
 </style>

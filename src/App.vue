@@ -25,5 +25,7 @@ export default {
   width: 100vw;
   align-items: center;
   justify-content: center;
+
+  background: linear-gradient(135deg, #f02fc2 0%, #6094ea 100%);
 }
 </style>

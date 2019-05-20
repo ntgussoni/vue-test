@@ -171,12 +171,11 @@ export default {
           position: absolute;
           top: 40%;
 
-          @include media("<tablet") {
-            font-size: 0.9rem;
+          @include media(">=phone") {
+            font-size: 0.8rem;
           }
-
-          @include media(">=tablet", "<desktop") {
-            font-size: 1.3rem;
+          @include media(">=tablet") {
+            font-size: 1.8rem;
           }
         }
 
