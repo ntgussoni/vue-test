@@ -9,14 +9,14 @@
           <div class="clearfix"/>
         </div>
 
-        <p class="card-number">{{ formData.cardNumber }}</p>
+        <p class="card-number">{{ cardNumber }}</p>
         <div class="left_container">
           <span class="label">Card holder</span>
-          <p class="info">{{ formData.name }}</p>
+          <p class="info">{{ name }}</p>
         </div>
         <div class="right_container">
           <span class="label">Expires</span>
-          <p class="info">{{ formData.expiration }}</p>
+          <p class="info">{{ expiration }}</p>
         </div>
       </div>
     </div>
@@ -37,9 +37,21 @@
 </template>
 
 <script>
+const extractValue = ({ value, placeholder }) => value || placeholder;
 export default {
   name: "Card",
-  props: ["formData", "flipCard"]
+  props: ["formData", "flipCard"],
+  computed: {
+    cardNumber() {
+      return extractValue(this.formData.cardNumber);
+    },
+    name() {
+      return extractValue(this.formData.name);
+    },
+    expiration() {
+      return extractValue(this.formData.expiration);
+    }
+  }
 };
 </script>
 
@@ -147,6 +159,7 @@ export default {
         }
 
         .card-number {
+          font-family: "Space Mono", monospace;
           display: block;
           width: 100%;
           height: 1rem;
@@ -168,6 +181,7 @@ export default {
         }
 
         .label {
+          font-family: "Space Mono", monospace;
           font-size: 1rem;
           text-transform: uppercase;
           color: rgba(255, 255, 255, 0.8);
@@ -179,6 +193,7 @@ export default {
         }
 
         .info {
+          font-family: "Space Mono", monospace;
           margin-bottom: 0;
           margin-top: 5px;
           font-size: 1rem;

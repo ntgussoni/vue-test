@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "Label",
-  props: ["target", "label"]
+  props: ["target"]
 };
 </script>
 

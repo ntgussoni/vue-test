@@ -3,18 +3,23 @@
     <h1>Payment</h1>
     <CardsCarousel :flipCard="flipCard" :formData="formData"/>
     <form method="POST" @submit="submitForm">
-      <NameInput @change="handleNameChange"/>
-      <CardNumberInput @change="handleCardNumberChange"/>
+      <NameInput :data="formData.name" @change="handleNameChange"/>
+      <CardNumberInput :data="formData.cardNumber" @change="handleCardNumberChange"/>
       <div class="container-100">
         <div class="container-50">
-          <ExpirationInput @change="handleExpirationChange"/>
+          <ExpirationInput :data="formData.expiration" @change="handleExpirationChange"/>
         </div>
         <div class="container-50">
-          <CcvInput @change="handleCcvChange" @blur="handleFlip" @focus="handleFlip"/>
+          <CcvInput
+            :data="formData.ccv"
+            @change="handleCcvChange"
+            @blur="handleFlip"
+            @focus="handleFlip"
+          />
         </div>
       </div>
       <div class="clearfix"/>
-      <PayButton/>
+      <PayButton :disabled="!formIsValid"/>
     </form>
   </div>
 </template>
@@ -27,6 +32,17 @@ import CardNumberInput from "@/components/CardNumberInput.vue";
 import ExpirationInput from "@/components/ExpirationInput.vue";
 import CcvInput from "@/components/CcvInput.vue";
 import { required, isCreditCard, isCCV, validateExpiration } from "@/helpers";
+
+const updateData = (data, newValue) => {
+  const { value, validations } = data;
+  const errors = [];
+  validations.forEach(fn => {
+    const msg = fn(newValue);
+    if (msg !== true) errors.push(msg);
+  });
+
+  return { ...data, value: newValue, isValid: errors.length == 0, errors };
+};
 
 export default {
   components: {
@@ -42,48 +58,84 @@ export default {
     return {
       flipCard: false,
       formData: {
-        name: "John Doe",
-        cardNumber: "**** **** **** 2456",
-        expiration: "11/22",
-        ccv: ""
+        name: {
+          value: "",
+          placeholder: "John Doe",
+          validations: [required],
+          isValid: false,
+          errors: []
+        },
+        cardNumber: {
+          value: "",
+          placeholder: "**** **** **** 2456",
+          validations: [required, isCreditCard],
+          isValid: false,
+          errors: []
+        },
+        expiration: {
+          value: "",
+          placeholder: "11/22",
+          validations: [required, validateExpiration],
+          isValid: false,
+          errors: []
+        },
+        ccv: {
+          value: "",
+          placeholder: "",
+          validations: [required, isCCV],
+          isValid: false,
+          errors: []
+        }
       }
     };
   },
 
+  computed: {
+    formIsValid() {
+      const { name, cardNumber, expiration, ccv } = this.formData;
+      return (
+        name.isValid && cardNumber.isValid && expiration.isValid && ccv.isValid
+      );
+    }
+  },
+
   methods: {
     handleNameChange(value) {
-      this.formData.name = value;
+      this.formData.name = updateData(this.formData.name, value);
     },
     handleCardNumberChange(value) {
-      this.formData.cardNumber = value;
+      this.formData.cardNumber = updateData(this.formData.cardNumber, value);
     },
     handleExpirationChange(value) {
-      this.formData.expiration = value;
+      this.formData.expiration = updateData(this.formData.expiration, value);
     },
     handleCcvChange(value) {
-      this.formData.ccv = value;
+      this.formData.ccv = updateData(this.formData.ccv, value);
     },
     handleFlip() {
       this.flipCard = !this.flipCard;
     },
 
-    validateForm() {
-      const { name, cardNumber, expiration, ccv } = this.formData;
-      const nameIsValid = required(name);
-      const cardNumberIsValid =
-        required(cardNumber) && isCreditCard(cardNumber);
-      const expirationIsValid =
-        required(expiration) && validateExpiration(expiration);
-      const ccvIsValid = required(ccv) && isCCV(ccv);
+    // validateForm() {
+    //   let isValid = true;
+    //   Object.keys(this.formData).forEach(key => {
+    //     const { value, validations } = this.formData[key];
+    //     const errors = [];
 
-      return (
-        nameIsValid && cardNumberIsValid && expirationIsValid && ccvIsValid
-      );
-    },
+    //     validations.forEach(fn => {
+    //       const msg = fn(value);
+    //       if (msg !== true) errors.push(msg);
+    //     });
+    //     if (errors.length > 0) isValid = false;
+    //     this.formData[key].errors = errors;
+    //   });
+
+    //   return isValid;
+    // },
 
     submitForm(e) {
       e.preventDefault();
-      this.validateForm() ? this.$router.push("success") : e.preventDefault();
+      this.formIsValid ? this.$router.push("success") : e.preventDefault();
     }
   }
 };

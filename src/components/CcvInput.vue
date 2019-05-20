@@ -6,51 +6,32 @@
       name="ccv"
       mask="####"
       placeholder="CCV"
-      :value="ccv"
       @input="handleChange"
       @focus.native="handleFocus"
       @blur.native="handleBlur"
     />
+    <span class="error">{{errors[0]}}</span>
   </fieldset>
 </template>
 
 <script>
-import Label from "@/components/FormLabel.vue";
+import BaseInput from "@/components/BaseInput.vue";
 import { TheMask } from "vue-the-mask";
 
 export default {
   name: "CCV",
-  props: ["ccv"],
+  extends: BaseInput,
   components: {
-    Label,
     MakedInput: TheMask
   },
 
   methods: {
-    handleChange(e) {
-      this.$emit("change", e);
-    },
-
     handleFocus() {
       this.$emit("focus");
     },
     handleBlur() {
       this.$emit("blur");
     }
-
-    // validDate(dValue) {
-    //   var result = false;
-    //   dValue = dValue.split("/");
-    //   var pattern = /^\d{2}$/;
-
-    //   if (dValue[0] < 1 || dValue[0] > 12) result = true;
-
-    //   if (!pattern.test(dValue[0]) || !pattern.test(dValue[1])) result = true;
-
-    //   if (dValue[2]) result = true;
-
-    //   if (result) alert("Please enter a valid date in MM/YY format.");
-    // }
   }
 };
 </script>

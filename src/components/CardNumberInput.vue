@@ -1,32 +1,20 @@
 <template>
   <fieldset>
     <Label for="card-number">Card Number</Label>
-    <MakedInput
-      name="card-number"
-      mask="#### #### #### ####"
-      masked
-      :value="cardNumber"
-      @input="handleChange"
-    />
+    <MakedInput name="card-number" mask="#### #### #### ####" masked @input="handleChange"/>
+    <span class="error">{{errors[0]}}</span>
   </fieldset>
 </template>
 
 <script>
-import Label from "@/components/FormLabel.vue";
+import BaseInput from "@/components/BaseInput.vue";
 import { TheMask } from "vue-the-mask";
 
 export default {
   name: "CardNumberInput",
-  props: ["cardNumber"],
+  extends: BaseInput,
   components: {
-    Label,
     MakedInput: TheMask
-  },
-
-  methods: {
-    handleChange(e) {
-      this.$emit("change", e);
-    }
   }
 };
 </script>

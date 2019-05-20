@@ -1,13 +1,24 @@
-input {
-  border: none;
-  border-bottom: 1px solid $secondary;
-  padding: 8px;
-  background: none;
-  color: $primary;
-  font-size: 1rem;
-  text-align: center;
-  width: 100%;
-  margin: auto;
-  margin-bottom: 16px;
-  outline: none;
+fieldset {
+  position: relative;
+  bottom: 1px;
+
+  input {
+    border: none;
+    border-bottom: 1px solid $secondary;
+    padding: 8px;
+    background: none;
+    color: $primary;
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 16px;
+    outline: none;
+  }
+
+  .error {
+    font-size: 0.6rem;
+    color: red;
+    position: absolute;
+  }
 }

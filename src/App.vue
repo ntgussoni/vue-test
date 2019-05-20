@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -12,9 +12,11 @@ export default {
 
 <style lang="scss">
 @import "./styles/reset.scss";
-@import url("https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i");
+@import url("https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
 * {
-  font-family: "Space Mono", monospace;
+  font-family: "Open Sans", "Space Mono", monospace;
 }
 
 #app {
