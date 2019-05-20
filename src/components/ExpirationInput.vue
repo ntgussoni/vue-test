@@ -1,15 +1,13 @@
 <template>
   <fieldset>
-    <Label for="ccv">CCV</Label>
+    <Label for="expiration">Expiration</Label>
     <MakedInput
-      type="password"
-      name="ccv"
-      mask="####"
-      placeholder="CCV"
-      :value="ccv"
+      name="expiration"
+      mask="##/##"
+      placeholder="MM/YY"
+      masked
+      :value="expiration"
       @input="handleChange"
-      @focus.native="handleFocus"
-      @blur.native="handleBlur"
     />
   </fieldset>
 </template>
@@ -19,8 +17,8 @@ import Label from "@/components/FormLabel.vue";
 import { TheMask } from "vue-the-mask";
 
 export default {
-  name: "CCV",
-  props: ["ccv"],
+  name: "ExpirationInput",
+  props: ["expiration"],
   components: {
     Label,
     MakedInput: TheMask
@@ -29,13 +27,6 @@ export default {
   methods: {
     handleChange(e) {
       this.$emit("change", e);
-    },
-
-    handleFocus() {
-      this.$emit("focus");
-    },
-    handleBlur() {
-      this.$emit("blur");
     }
 
     // validDate(dValue) {

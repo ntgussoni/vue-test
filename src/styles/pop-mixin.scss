@@ -1,0 +1,9 @@
+@mixin pop-mixin($scale) {
+  box-shadow: 1px 2px #aaa3a3;
+  -webkit-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275 0.5);
+  -moz-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5;
+  -ms-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5;
+  -o-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5;
+  transform: scale($scale);
+}

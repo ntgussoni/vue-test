@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -11,41 +11,17 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./styles/reset.scss";
+@import url("https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i");
+* {
+  font-family: "Space Mono", monospace;
+}
+
 #app {
-  html {
-    box-sizing: border-box;
-    font-size: 16px;
-  }
-
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-
-  body,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  ol,
-  ul {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-  }
-
-  ol,
-  ul {
-    list-style: none;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
 }
 </style>
