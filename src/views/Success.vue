@@ -25,9 +25,9 @@ export default {
   justify-content: center;
   width: 400px;
   height: 300px;
-  background: #73aa0a;
+  background: #4caf50;
   color: #fff;
-  border-radius: 8px;
+  border-radius: 16px;
   padding: 16px;
 
   @include media("<desktop") {

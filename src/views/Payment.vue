@@ -140,7 +140,7 @@ export default {
     width: 60vw;
   }
   @include media(">=desktop") {
-    width: 45vw;
+    width: 30vw;
   }
 
   h1 {
