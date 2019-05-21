@@ -2,7 +2,7 @@
   <fieldset>
     <Label for="card-number">Card Number</Label>
     <MakedInput name="card-number" mask="#### #### #### ####" masked @input="handleChange"/>
-    <span class="error">{{errors[0]}}</span>
+    <span v-if="errors.length > 0" class="error">{{ errors[0] }}</span>
   </fieldset>
 </template>
 

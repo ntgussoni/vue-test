@@ -1,5 +1,5 @@
 <template>
-  <button :disabled="disabled">
+  <button type="submit" :disabled="disabled">
     PAY NOW
     <AngleRight class="icon"/>
   </button>

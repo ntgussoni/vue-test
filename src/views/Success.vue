@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <CheckIcon class="success-icon"/>
+    <CheckIcon class="success-icon" />
     <h1>Payment successfull</h1>
     <h2>Thank you!</h2>
   </div>

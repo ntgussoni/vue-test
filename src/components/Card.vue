@@ -1,12 +1,11 @@
 <template>
   <div class="card" v-bind:class="{ flipped: flipCard }">
-    >
     <div class="container front padder">
       <div class="inner">
         <div class="logo">
-          <span class="yellow"/>
-          <span class="red"/>
-          <div class="clearfix"/>
+          <span class="yellow" />
+          <span class="red" />
+          <div class="clearfix" />
         </div>
 
         <p class="card-number">{{ cardNumber }}</p>
@@ -23,13 +22,13 @@
 
     <div class="container back">
       <div class="inner">
-        <span class="band"/>
+        <span class="band" />
         <span class="secret">306</span>
 
         <div class="logo">
-          <span class="yellow"/>
-          <span class="red"/>
-          <div class="clearfix"/>
+          <span class="yellow" />
+          <span class="red" />
+          <div class="clearfix" />
         </div>
       </div>
     </div>
@@ -37,21 +36,9 @@
 </template>
 
 <script>
-const extractValue = ({ value, placeholder }) => value || placeholder;
 export default {
   name: "Card",
-  props: ["formData", "flipCard"],
-  computed: {
-    cardNumber() {
-      return extractValue(this.formData.cardNumber);
-    },
-    name() {
-      return extractValue(this.formData.name);
-    },
-    expiration() {
-      return extractValue(this.formData.expiration);
-    }
-  }
+  props: ["cardNumber", "name", "expiration", "flipCard"]
 };
 </script>
 

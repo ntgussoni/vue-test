@@ -2,7 +2,7 @@
   <fieldset>
     <Label for="expiration">Expiration</Label>
     <MakedInput name="expiration" mask="##/##" placeholder="MM/YY" masked @input="handleChange"/>
-    <span class="error">{{errors[0]}}</span>
+    <span v-if="errors.length > 0" class="error">{{ errors[0] }}</span>
   </fieldset>
 </template>
 

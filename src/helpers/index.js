@@ -23,3 +23,5 @@ export const validateExpiration = expiration => {
   let expiryDate = new Date(`20${year}-${month}-01`);
   return !expiryDate > today ? "The credit card has expired" : true;
 };
+
+export const extractValue = ({ value, placeholder }) => value || placeholder;

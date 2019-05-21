@@ -10,7 +10,7 @@
       @focus.native="handleFocus"
       @blur.native="handleBlur"
     />
-    <span class="error">{{errors[0]}}</span>
+    <span v-if="errors.length > 0" class="error">{{ errors[0] }}</span>
   </fieldset>
 </template>
 

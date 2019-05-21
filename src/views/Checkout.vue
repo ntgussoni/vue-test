@@ -1,7 +1,9 @@
 <template>
   <div id="container">
     <h1>CHECKOUT</h1>
-    <CardsCarousel :flipCard="flipCard" :formData="formData"/>
+    <CardWrapper>
+      <Card :flipCard="flipCard" :cardNumber="cardNumber" :name="name" :expiration="expiration"/>
+    </CardWrapper>
     <form method="POST" @submit="submitForm">
       <NameInput :data="formData.name" @change="handleNameChange"/>
       <CardNumberInput :data="formData.cardNumber" @change="handleCardNumberChange"/>
@@ -25,19 +27,27 @@
 </template>
 
 <script>
-import CardsCarousel from "@/components/CardsCarousel";
+import Card from "@/components/Card";
+import CardWrapper from "@/components/CardWrapper";
 import PayButton from "@/components/PayButton";
 import NameInput from "@/components/NameInput.vue";
 import CardNumberInput from "@/components/CardNumberInput.vue";
 import ExpirationInput from "@/components/ExpirationInput.vue";
 import CcvInput from "@/components/CcvInput.vue";
-import { required, isCreditCard, isCCV, validateExpiration } from "@/helpers";
+import {
+  required,
+  isCreditCard,
+  isCCV,
+  validateExpiration,
+  extractValue
+} from "@/helpers";
 
 const updateData = (data, newValue) => {
-  const { value, validations } = data;
+  const { validations } = data;
   const errors = [];
   validations.forEach(fn => {
     const msg = fn(newValue);
+
     if (msg !== true) errors.push(msg);
   });
 
@@ -46,7 +56,8 @@ const updateData = (data, newValue) => {
 
 export default {
   components: {
-    CardsCarousel,
+    Card,
+    CardWrapper,
     PayButton,
     NameInput,
     CardNumberInput,
@@ -67,7 +78,7 @@ export default {
         },
         cardNumber: {
           value: "",
-          placeholder: "**** **** **** 2456",
+          placeholder: "**** **** **** ****",
           validations: [required, isCreditCard],
           isValid: false,
           errors: []
@@ -96,6 +107,15 @@ export default {
       return (
         name.isValid && cardNumber.isValid && expiration.isValid && ccv.isValid
       );
+    },
+    cardNumber() {
+      return extractValue(this.formData.cardNumber);
+    },
+    name() {
+      return extractValue(this.formData.name);
+    },
+    expiration() {
+      return extractValue(this.formData.expiration);
     }
   },
 
